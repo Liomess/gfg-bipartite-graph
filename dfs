@@ -1,0 +1,21 @@
+class Solution:
+	def isBipartite(self, v, adj):
+	    def dfs(color,i,adj,node):
+	        if node==i:
+	            color[i]=1
+	        else:
+	            color[i]=-1*color[node]
+	        for val in adj[i]:
+	            if color[val]==0:
+	                if dfs(color,val,adj,i)==False:
+	                    return False
+	            else:
+	                if color[i]==color[val]:
+	                    return False
+	        return True
+		color=[0]*v
+		for i in range(v):
+		    if color[i]==0:
+		        if dfs(color,i,adj,i)==False:
+		            return False
+		return True
